@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "884938851721",
+    "project_id": "flutter-boiler-plate-efa2e",
+    "storage_bucket": "flutter-boiler-plate-efa2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884938851721:android:898ae34181a6b57ed00d58",
+        "android_client_info": {
+          "package_name": "com.example.boiler_plate_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoQi6S7N0e_XAyS5ol3na8Y9OLrWZ0b18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884938851721:android:744dd9bc7e0e2908d00d58",
+        "android_client_info": {
+          "package_name": "com.example.flutter_boiler_plate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoQi6S7N0e_XAyS5ol3na8Y9OLrWZ0b18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
