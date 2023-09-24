@@ -3,11 +3,9 @@ import 'package:boiler_plate_flutter/authentication/view_models/sign_up_view_mod
 import 'package:boiler_plate_flutter/common/constants/gaps.dart';
 import 'package:boiler_plate_flutter/common/constants/sizes.dart';
 import 'package:boiler_plate_flutter/common/widgets/auth_button.dart';
-import 'package:boiler_plate_flutter/common/widgets/custom_snackbar.dart';
 import 'package:boiler_plate_flutter/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -55,41 +53,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
 
-        try {
-          //final state = ref.read(signUpForm.notifier).state;
-          // ref.read(signUpForm.notifier).state = {
-          //   ...state,
-          //   "password": _password,
-          // };
-          ref.read(signUpForm.notifier).state = {
-            "email": _email,
-            "password": _password,
-          };
-          ref.read(signUpProvider.notifier).signUp(context);
-          // await context.read(userProvider.notifier).signUp(
-          //       formData['email']!,
-          //       formData['password']!,
-          //     );
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'weak-password') {
-            CustomSnackBar.show(
-                context, SnackBarType.error, '회원가입에 실패하였습니다.(2)');
-          } else if (e.code == 'email-already-in-use') {
-            CustomSnackBar.show(
-                context, SnackBarType.error, '회원가입에 실패하였습니다.(3)');
-          } else {
-            // Firebase 예외 처리
-            CustomSnackBar.show(context, SnackBarType.error, e.message!);
-          }
-        } catch (e) {
-          print("11");
-          print(e.toString());
-          // 추가된 부분
-          // signInWithEmailAndPassword 메소드에서 던져진 모든 종류의 예외를 캐치합니다.
-          // e.toString()을 통해 오류 메시지 전체를 출력할 수 있습니다.
-          CustomSnackBar.show(context, SnackBarType.error, '회원가입에 실패하였습니다.(4)');
-          // print('An error occurred while trying to log in: ${e.toString()}');
-        }
+        ref.read(signUpForm.notifier).state = {
+          "email": _email,
+          "password": _password,
+        };
+        ref.read(signUpProvider.notifier).signUp(context);
       }
     }
   }

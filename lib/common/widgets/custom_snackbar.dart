@@ -12,7 +12,10 @@ class CustomSnackBar {
             color: Colors.white,
           ),
           const SizedBox(width: 10),
-          Text(message),
+          Flexible(
+            // Add this
+            child: Text(message),
+          ),
         ],
       ),
       backgroundColor: type == SnackBarType.success ? Colors.green : Colors.red,

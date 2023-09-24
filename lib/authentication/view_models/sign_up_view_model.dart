@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:boiler_plate_flutter/common/widgets/custom_snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:boiler_plate_flutter/authentication/repos/authentication_repo.dart';
 import 'package:boiler_plate_flutter/authentication/view_models/users_view_model.dart';
@@ -27,6 +29,16 @@ class SignUpViewModel extends AsyncNotifier<void> {
       await users.createProfile(userCredential);
     });
     if (state.hasError) {
+      final error = state.error
+          as FirebaseException; // Cast the error to a FirebaseException
+      final message = error.code; // Get the error message
+      if (message == 'INVALID_LOGIN_CREDENTIALS') {
+        CustomSnackBar.show(
+            context, SnackBarType.error, '회원가입 실패. 존재하지 않는 유저정보 입니다.');
+      } else {
+        CustomSnackBar.show(context, SnackBarType.error, '회원가입 실패. 에러코드: 9999');
+      }
+
       showFirebaseErrorSnack(context, state.error);
     } else {
       context.go("/tutorial");

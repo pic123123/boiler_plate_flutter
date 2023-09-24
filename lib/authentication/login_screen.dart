@@ -4,7 +4,6 @@ import 'package:boiler_plate_flutter/authentication/view_models/login_view_model
 import 'package:boiler_plate_flutter/common/constants/gaps.dart';
 import 'package:boiler_plate_flutter/common/constants/sizes.dart';
 import 'package:boiler_plate_flutter/common/widgets/auth_button.dart';
-import 'package:boiler_plate_flutter/common/widgets/custom_snackbar.dart';
 import 'package:boiler_plate_flutter/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -55,29 +54,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-
-        try {
-          ref.read(loginProvider.notifier).login(
-                formData["email"]!,
-                formData["password"]!,
-                context,
-              );
-        } on FirebaseAuthException catch (e) {
-          print(e.toString());
-          if (e.code == 'user-not-found') {
-            CustomSnackBar.show(context, SnackBarType.error,
-                '로그인에 실패하였습니다. 존재하지 않는 유저정보 입니다.(2)');
-          } else if (e.code == 'wrong-password') {
-            CustomSnackBar.show(context, SnackBarType.error,
-                '로그인에 실패하였습니다. 비밀번호를 확인해 주시기 바랍니다.(3)');
-          }
-        } catch (e) {
-          // 추가된 부분
-          // signInWithEmailAndPassword 메소드에서 던져진 모든 종류의 예외를 캐치합니다.
-          // e.toString()을 통해 오류 메시지 전체를 출력할 수 있습니다.
-          //print('An error occurred while trying to log in: ${e.toString()}');
-          CustomSnackBar.show(context, SnackBarType.error, '로그인에 실패하였습니다.(4)');
-        }
+        ref.read(loginProvider.notifier).login(
+              formData["email"]!,
+              formData["password"]!,
+              context,
+            );
       }
     }
   }
